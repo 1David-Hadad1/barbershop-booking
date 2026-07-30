@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Rubik", "Rubik Fallback", system-ui, sans-serif;
+  --font-display: "Frank Ruhl Libre", "Rubik", serif;
+
+  --color-bg: #0f0b08;
+  --color-bg-soft: #17120d;
+  --color-fg: #f3ece1;
+  --color-card: #1c1611;
+  --color-card-hover: #251d16;
+  --color-border: #34291f;
+  --color-muted: #a89c8a;
+  --color-accent: #c9973a;
+  --color-accent-2: #9a3b3b;
+  --color-accent-soft: #c9973a1f;
+  --color-danger: #e0524a;
+  --color-success: #4caf7d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.bg-gradient-hero {
+  background:
+    radial-gradient(60% 60% at 15% 0%, color-mix(in srgb, var(--color-accent) 22%, transparent), transparent 70%),
+    radial-gradient(50% 50% at 100% 20%, color-mix(in srgb, var(--color-accent-2) 16%, transparent), transparent 70%),
+    var(--color-bg);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
