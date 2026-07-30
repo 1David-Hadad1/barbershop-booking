@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { supabase } from '../lib/supabaseClient'
 import { getAvailableSlots, getUpcomingOpenDates, toDateKey } from '../lib/slots'
 import Button from './Button'
@@ -89,7 +89,6 @@ export default function AppointmentCard({ appointment, onDelete, onReschedule })
 
   return (
     <motion.div
-      layout
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20, height: 0 }}
@@ -140,32 +139,38 @@ export default function AppointmentCard({ appointment, onDelete, onReschedule })
         )}
       </div>
 
-      {editing && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          className="mt-4 flex flex-col gap-4 border-t border-border pt-4"
-        >
-          <div>
-            <p className="mb-2 text-xs font-semibold text-muted">תאריך חדש</p>
-            <DatePicker dates={dates} selectedDate={editDate} onSelect={setEditDate} />
-          </div>
-          <div>
-            <p className="mb-2 text-xs font-semibold text-muted">שעה חדשה</p>
-            <TimeSlotGrid
-              slots={availableEditSlots}
-              selectedTime={editTime}
-              onSelect={setEditTime}
-              loading={editLoading}
-            />
-          </div>
-          {editError && <p className="text-sm font-medium text-danger">{editError}</p>}
-          <Button variant="primary" onClick={handleSave} disabled={saving} className="w-fit px-4 py-2 text-sm">
-            {saving ? 'שומר...' : 'שמירת שינוי'}
-          </Button>
-        </motion.div>
-      )}
+      <AnimatePresence initial={false}>
+        {editing && (
+          <motion.div
+            key="edit-panel"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="mt-4 flex flex-col gap-4 border-t border-border pt-4">
+              <div>
+                <p className="mb-2 text-xs font-semibold text-muted">תאריך חדש</p>
+                <DatePicker dates={dates} selectedDate={editDate} onSelect={setEditDate} />
+              </div>
+              <div>
+                <p className="mb-2 text-xs font-semibold text-muted">שעה חדשה</p>
+                <TimeSlotGrid
+                  slots={availableEditSlots}
+                  selectedTime={editTime}
+                  onSelect={setEditTime}
+                  loading={editLoading}
+                />
+              </div>
+              {editError && <p className="text-sm font-medium text-danger">{editError}</p>}
+              <Button variant="primary" onClick={handleSave} disabled={saving} className="w-fit px-4 py-2 text-sm">
+                {saving ? 'שומר...' : 'שמירת שינוי'}
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }
