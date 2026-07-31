@@ -4,18 +4,18 @@
   --font-sans: "Rubik", "Rubik Fallback", system-ui, sans-serif;
   --font-display: "Frank Ruhl Libre", "Rubik", serif;
 
-  --color-bg: #0f0b08;
-  --color-bg-soft: #17120d;
-  --color-fg: #f3ece1;
-  --color-card: #1c1611;
-  --color-card-hover: #251d16;
-  --color-border: #34291f;
-  --color-muted: #a89c8a;
-  --color-accent: #c9973a;
-  --color-accent-2: #9a3b3b;
-  --color-accent-soft: #c9973a1f;
-  --color-danger: #e0524a;
-  --color-success: #4caf7d;
+  --color-bg: #faf3e6;
+  --color-bg-soft: #f2e6d0;
+  --color-fg: #2b2118;
+  --color-card: #fffbf3;
+  --color-card-hover: #f7ecd9;
+  --color-border: #e4d5b8;
+  --color-muted: #86755f;
+  --color-accent: #3f6b4a;
+  --color-accent-2: #8a5a2b;
+  --color-accent-soft: #3f6b4a1a;
+  --color-danger: #c0392b;
+  --color-success: #3f8f5f;
 }
 
 html {
